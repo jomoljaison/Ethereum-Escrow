@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0 
 pragma solidity >=0.4.16 <0.9.0;
-// Defining a Contract
+
 contract Escrow{
 
 	// Declaring the state variables
@@ -11,7 +11,7 @@ contract Escrow{
 	address payable public arbiter;
 	 uint public PdfCount = 0;
 
-// 	mapping(address => uint) TotalAmount;
+
 
    struct Pdf {
         uint id;
@@ -25,31 +25,30 @@ contract Escrow{
     mapping(uint => string) ipfsUrl;
 
 
-	// Defining a enumerator 'State'
+	
 	enum State{
 		
-		// Following are the data members
+		
 		awate_payment, awate_delivery, complete
 	}
 
-	// Declaring the object of the enumerator
+	
 	State public state;
 	
-	// Defining function modifier 'instate'
 	modifier instate(State expected_state){
 		
 		require(state == expected_state);
 		_;
 	}
 
-// Defining function modifier 'onlyBuyer'
+
 	modifier onlyBuyer(){
 		require(msg.sender == buyer ||
 				msg.sender == arbiter);
 		_;
 	}
 
-	// Defining function modifier 'onlySeller'
+
 	modifier onlySeller(){
 		require(msg.sender == seller);
 		_;
@@ -58,12 +57,11 @@ contract Escrow{
 	event gets(string name);
     event confirmpayment(address buyer);
 
-	// Defining a constructor
+
 	constructor(address payable _buyer,
 				address payable _sender) public{
 		
-		// Assigning the values of the
-		// state variables
+		
 		arbiter = msg.sender;
 		buyer = _buyer;
 		seller = _sender;
@@ -96,7 +94,6 @@ contract Escrow{
     
     
     
-	// Defining function to confirm payment
 	function confirmPayment() onlyBuyer external payable{
 
 		state = State.awate_delivery;
@@ -105,7 +102,6 @@ contract Escrow{
 	}  
 	
 	
-	// Defining function to confirm delivery
 	function confirmDelivery() onlyBuyer external{
 
 		seller.transfer(address(this).balance);
@@ -115,7 +111,6 @@ contract Escrow{
 	
 	
 
-	// Defining function to return payment
 	function ReturnPayment() onlySeller instate(
 	State.awate_delivery)public{
 		
