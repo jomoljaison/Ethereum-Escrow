@@ -29,7 +29,7 @@ In order to run this project locally in your computer you need the following pac
 
 	Create new workspace
 
-				1.Workspace name : SamsungContarct
+				1.Workspace name : Escrow
 
 				2.Server : Hostname------  127.0.0.1-lo
 
