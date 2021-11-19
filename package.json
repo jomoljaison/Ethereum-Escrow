@@ -2,6 +2,7 @@
   "name": "escrow-pjt",
   "version": "0.0.0",
   "private": true,
+   "author": "Jomol Jaison",
   "scripts": {
     "start": "node ./bin/www"
   },
